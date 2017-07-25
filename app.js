@@ -1,6 +1,9 @@
 const express = require('express')
-const knex = require('knex')
-const server = express()
+const knex = require('./knex')
+const app = express()
+const game = require('./routes/vg')
 const port = process.env.PORT || 1995
 
-server.listen(port)
+app.use('/videogames', game)
+
+app.listen(port)
