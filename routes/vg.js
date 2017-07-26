@@ -30,4 +30,16 @@ router.post('/', (req, res) =>{
     res.json(newGame)
   })
 })
+
+router.put('/:id', (req, res) => {
+  let id = req.params.id
+  let edit = req.body
+  knex('played_video_games')
+  .where('id', id)
+  .update(edit)
+  .returning('*')
+  .then((edited) => {
+    res.json(edited)
+  })
+})
  module.exports = router
