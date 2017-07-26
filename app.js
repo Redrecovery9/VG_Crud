@@ -6,7 +6,7 @@ const game = require('./routes/vg')
 const port = process.env.PORT || 1995
 
 app.use(cors())
-app.use('/videogames', game)
+app.use('/', game)
 
 app.listen(port)
 
