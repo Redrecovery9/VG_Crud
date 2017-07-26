@@ -42,4 +42,16 @@ router.put('/:id', (req, res) => {
     res.json(edited)
   })
 })
+
+router.delete('/:id', (req, res) => {
+  let id = req.params.id
+  knex('played_video_games')
+  .where('id', id)
+  .del()
+  .then((deleted) => {
+    res.json({
+      message: 'Video Game Deleted'
+    })
+  })
+})
  module.exports = router
