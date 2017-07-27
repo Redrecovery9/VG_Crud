@@ -1,9 +1,8 @@
 
 exports.seed = function(knex, Promise) {
-  // Deletes ALL existing entries
   return knex('played_video_games').del()
+    // knex.raw('DELETE FROM "played_video_games"; ALTER SEQUENCE played_video_games_id_seq RESTART WITH 6;')
     .then(function () {
-      // Inserts seed entries
       return knex('played_video_games').insert([
         {name: 'Halo 3 ', platform: 'Xbox360', beaten: 'true', rating: '5'},
         {name: 'Skyrim', platform: 'Xbox360 / XboxOne', beaten: 'false', rating: '5'},
