@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router();
-const queries = require('../queries')
 const knex = require('../knex')
 const bodyParser =require('body-parser')
 
