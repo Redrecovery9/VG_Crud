@@ -10,6 +10,12 @@ router.get('/', (req, res, next) => {
   })
 })
 
+function validGames(data) {
+  let validTitle = data.name.trim() != '';
+  let validPlatform = data.platform.trim() != '';
+  return validTitle && validPlatform
+}
+
 router.get('/:id', (req, res) => {
   let id = req.params.id
   knex('played_video_games')
@@ -22,24 +28,32 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) =>{
   let newGame = req.body
-  knex('played_video_games')
-  .insert(newGame)
-  .returning('*')
-  .then((newGame) => {
-    res.json(newGame)
-  })
+  if (validGames(newGame)) {
+    knex('played_video_games')
+    .insert(newGame)
+    .returning('*')
+    .then((newGame) => {
+      res.json(newGame)
+    })
+  } else {
+    res.json({message: 'Invalid Entry'})
+  }
 })
 
 router.put('/:id', (req, res) => {
   let id = req.params.id
   let edit = req.body
-  knex('played_video_games')
-  .where('id', id)
-  .update(edit)
-  .returning('*')
-  .then((edited) => {
-    res.json(edited)
-  })
+  if (validGames(edit)) {
+    knex('played_video_games')
+    .where('id', id)
+    .update(edit)
+    .returning('*')
+    .then((edited) => {
+      res.json(edited)
+    })
+  }else {
+    res.json({message: 'Invalid Entry'})
+  }
 })
 
 router.delete('/:id', (req, res) => {
