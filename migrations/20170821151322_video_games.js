@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.text('platform')
     table.boolean('beaten')
     table.integer('rating')
+    table.integer('users_id').references('id').inTable('users').notNull().onDelete('cascade')
   })
 };
 
