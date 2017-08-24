@@ -1,6 +1,6 @@
 
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('played_video_games', (table) =>{
+  return knex.schema.createTable('video_games', (table) =>{
     table.increments()
     table.text('name')
     table.text('platform')
@@ -11,5 +11,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTableIfExists('played_video_games')
+  return knex.schema.dropTableIfExists('video_games')
 };

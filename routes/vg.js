@@ -4,7 +4,7 @@ const knex = require('../knex')
 const bodyParser =require('body-parser')
 
 router.get('/', (req, res, next) => {
-  knex('played_video_games')
+  knex('video_games')
   .then((allGames) => {
     res.json(allGames)
   })
@@ -18,7 +18,7 @@ function validGames(data) {
 
 router.get('/:id', (req, res) => {
   let id = req.params.id
-  knex('played_video_games')
+  knex('video_games')
   .where('id', id)
   .first()
   .then((videogame) => {
@@ -29,7 +29,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) =>{
   let newGame = req.body
   if (validGames(newGame)) {
-    knex('played_video_games')
+    knex('video_games')
     .insert(newGame)
     .returning('*')
     .then((newGame) => {
@@ -44,7 +44,7 @@ router.put('/:id', (req, res) => {
   let id = req.params.id
   let edit = req.body
   if (validGames(edit)) {
-    knex('played_video_games')
+    knex('video_games')
     .where('id', id)
     .update(edit)
     .returning('*')
@@ -58,7 +58,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   let id = req.params.id
-  knex('played_video_games')
+  knex('video_games')
   .where('id', id)
   .del()
   .then((deleted) => {

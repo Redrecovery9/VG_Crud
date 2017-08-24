@@ -13,5 +13,10 @@ module.exports = {
         user.id = id[0]
         return user;
       })
-  }
+  },
+  getgamesByUserId: id => {
+    return knex('video_games')
+      .select('id', '*')
+      .where('users_id', id)
+  },
 }

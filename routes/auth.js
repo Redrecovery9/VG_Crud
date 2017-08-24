@@ -29,6 +29,13 @@ router.post('/login', validate.login, (req,res,next) => {
     })
 })
 
+router.get('/users/:id/games', auth.authorize, (req, res) => {
+  queries.getgamesByUserId(req.params.id)
+  .then(games => {
+    res.json({data: games});
+  })
+});
+
 router.post('/signup', validate.signup, (req,res,next) => {
   queries.getUserByEmail(req.body.email).then(user => {
     if(user.length == 0){
